@@ -1,9 +1,17 @@
+import java.util.Properties
+
 plugins {
   alias(libs.plugins.android.application)
   alias(libs.plugins.kotlin.compose)
   alias(libs.plugins.google.devtools.ksp)
   alias(libs.plugins.roborazzi)
   alias(libs.plugins.secrets)
+}
+
+val keystorePropertiesFile = rootProject.file("key.properties")
+val keystoreProperties = Properties()
+if (keystorePropertiesFile.exists()) {
+  keystorePropertiesFile.inputStream().use { keystoreProperties.load(it) }
 }
 
 if (gradle.startParameter.taskNames.any {
@@ -29,11 +37,20 @@ android {
 
   signingConfigs {
     create("release") {
-      val keystorePath = System.getenv("KEYSTORE_PATH") ?: "${rootDir}/my-upload-key.jks"
-      storeFile = file(keystorePath)
-      storePassword = System.getenv("STORE_PASSWORD")
-      keyAlias = "upload"
-      keyPassword = System.getenv("KEY_PASSWORD")
+      if (keystorePropertiesFile.exists()) {
+        keyAlias = keystoreProperties.getProperty("keyAlias") ?: "upload"
+        keyPassword = keystoreProperties.getProperty("keyPassword")
+        storeFile = rootProject.file(
+          keystoreProperties.getProperty("storeFile") ?: "my-upload-key.jks",
+        )
+        storePassword = keystoreProperties.getProperty("storePassword")
+      } else {
+        val keystorePath = System.getenv("KEYSTORE_PATH") ?: "${rootDir}/my-upload-key.jks"
+        storeFile = file(keystorePath)
+        storePassword = System.getenv("STORE_PASSWORD")
+        keyAlias = "upload"
+        keyPassword = System.getenv("KEY_PASSWORD")
+      }
     }
     create("debugConfig") {
       storeFile = file("${rootDir}/debug.keystore")
