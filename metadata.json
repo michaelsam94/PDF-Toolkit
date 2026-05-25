@@ -1,0 +1,6 @@
+{
+  "name": "PDF Toolkit",
+  "description": "Secure offline PDF editor to merge, split, sign, and convert documents safely.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
