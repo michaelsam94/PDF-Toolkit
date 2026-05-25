@@ -6,25 +6,32 @@
     android:viewportWidth="108"
     android:viewportHeight="108">
     <path android:pathData="M0,0h108v108h-108z">
-        <gradient
-            android:startX="0"
-            android:startY="0"
-            android:endX="108"
-            android:endY="108"
-            android:type="linear">
-            <item android:offset="0" android:color="#1A56DB" />
-            <item android:offset="1" android:color="#1E3A8A" />
-        </gradient>
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:startX="0"
+                android:startY="0"
+                android:endX="108"
+                android:endY="108"
+                android:type="linear">
+                <item android:offset="0" android:color="#7C5CFF" />
+                <item android:offset="0.55" android:color="#6750A4" />
+                <item android:offset="1" android:color="#381E72" />
+            </gradient>
+        </aapt:attr>
     </path>
-    <!-- Geometric decorative line vectors for tech premium brand -->
+    <!-- Soft toolkit grid -->
     <path
         android:fillColor="#00000000"
-        android:pathData="M0,18L108,90"
-        android:strokeWidth="1.2"
-        android:strokeColor="#22FFFFFF" />
+        android:pathData="M0,36L108,72"
+        android:strokeWidth="1"
+        android:strokeColor="#18FFFFFF" />
     <path
         android:fillColor="#00000000"
-        android:pathData="M18,0L90,108"
-        android:strokeWidth="1.2"
-        android:strokeColor="#22FFFFFF" />
+        android:pathData="M36,0L72,108"
+        android:strokeWidth="1"
+        android:strokeColor="#18FFFFFF" />
+    <!-- Corner glow -->
+    <path
+        android:fillColor="#22FFFFFF"
+        android:pathData="M78,8a28,28 0 1,1 -56,0a28,28 0 1,1 56,0" />
 </vector>
